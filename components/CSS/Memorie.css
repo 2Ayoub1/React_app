@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); 
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    text-decoration: none;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+:root {
+    --bg-color: #121212;
+    --second-bg-color: #1e1e1e;
+    --text-color: #e0e0e0;
+    --main-color: #1de9b6;
+    --aspect-ratio: 3/4;
+    --box-color-1: linear-gradient(90deg, #ff3c00, #ffe600);
+    --box-color-2: linear-gradient(90deg, #00bcd4, #ff00ff);;
+    --button-color: radial-gradient(circle, rgba(255, 174, 0.3) 0%, rgba(255, 180, 0, 1) 50%, rgba(255, 208, 0.5) 100%);    --button-hover-color: radial-gradient(circle, rgba(255, 100, 0.3) 0%, rgba(255, 120, 0, 1) 50%, rgba(255, 150, 0.5) 100%);
+}
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(239,255,0);
+    background: radial-gradient(circle, rgba(239,255,0,0.3113620448179272) 0%, rgba(255,180,0,1) 50%, rgba(255,0,0,0.5718662464985995) 100%);
+}
+
+
+.container {
+    min-width: 55rem;
+    min-height: 68rem;
+    background: rgba(0, 0, 0, .2);
+    backdrop-filter: blur(80px);
+    border-radius: .8rem;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 0 .5rem hsla(0, 0%, 20%, 0.5);
+}
+
+.text {
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+    width: 10rem;
+    height: auto;
+    color: var(--text-color);
+    margin-left: 78%;
+}
+
+.text p {
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.text span {
+    color: #ddd;
+    font-weight: 300;
+}
+
+.gameBoard {
+    width: 85%;
+    height: 73%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameBoard {
+    display: grid;
+    grid-template-columns: repeat(4,0fr);
+    grid-template-rows: repeat(4,0fr);
+    min-width: 85%;
+    place-items: center;
+    height: 69%;
+    margin: auto;
+    column-gap: 1rem;
+}
+
+/* ANIMATION */
+@keyframes card {
+    0%, 50% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+@keyframes img {
+    0%, 50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes colorCard{
+    0%,50%{
+        background-color: #4caf50;
+    }
+
+    95%,100% {
+        background-color: #2c3e50;
+    }
+}
+/* Animation End */
+
+/* Card */
+.card {
+    min-width: 10rem;
+    height: 10rem;
+    margin-top: 1.2rem;
+    border-radius: .8rem;
+    perspective: 1000px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s; 
+    transform-style: preserve-3d; 
+    transform: rotateY(180deg); 
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: .8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden; 
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.card-back::before {
+    content: '?';
+    font-size: 5rem;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+.card.active {
+    transform: rotateY(0deg);
+}
+
+.card.active .card-inner {
+    transform: rotateY(0deg);
+}
+
+.card.isMatched {
+    transform: rotateY(0deg);
+    opacity: .5;
+}
+
+.card.card.isMatched .card-inner {
+    animation: 8s colorCard linear;
+    border-radius: .8rem;
+    opacity: .5;
+    transform: rotateY(0deg);
+}
+
+
+.card-front img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover; 
+}
+
+.card:nth-child(4n+1), .card:nth-child(4n+3) {
+    background: var(--box-color-1);
+}
+
+.card:nth-child(4n+2), .card:nth-child(4n+4) {
+    background: var(--box-color-2);
+}
+/* Card End */
+
+
+.button {
+    --button-color: radial-gradient(circle, rgba(255, 174, 0.3) 0%, rgba(255, 180, 0, 1) 50%, rgba(255, 208, 0.5) 100%);
+    --button-hover-color: radial-gradient(circle, rgba(255, 100, 0.3) 0%, rgba(255, 120, 0, 1) 50%, rgba(255, 150, 0.5) 100%);
+    
+    background: var(--button-color);
+    color: var(--second-bg-color);
+    width: 18rem;
+    height: 6.5rem;
+    margin-top: 4rem;
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    transition: background 1s ease;
+}
+
+.button:hover {
+    background: var(--button-hover-color);
+}
+
+@media (max-width:1200px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media (max-width: 700px) {
+    .container {
+        min-width: 50rem;
+        min-height: 68rem;
+    }
+
+    .button {
+        margin-top: 4.4rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        min-width: 48rem;
+        min-height: 62rem;
+        padding: 1rem;
+    }
+
+    .button {
+        margin-top: 3.5rem;
+    }
+
+    .card {
+        min-width: 9rem;
+        height: 9rem;
+    }
+
+    .text p{
+        font-size: 2rem;
+        margin-left: 0%;
+    }
+}
+
+@media (max-width: 450px) {
+    .container {
+        min-width: 44rem;
+        min-height: 62rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .container {
+        min-width: 42rem;
+        min-height: 62rem;
+    }
+
+    .card {
+        min-width: 8.5rem;
+        height: 8.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        min-width: 40rem;
+        min-height: 60rem;
+    }
+
+    .button {
+        margin-top: 3.5rem;
+    }
+
+    .card {
+        min-width: 8.2rem;
+        height: 8.2rem;
+    }
+}
+
+@media (max-width: 376px) {
+    .container {
+        min-width: 38rem;
+        min-height: 55rem;
+    }
+
+    .button {
+        margin-top: 2.2rem;
+    }
+
+    .card {
+        min-width: 7.8rem;
+        height: 7.8rem;
+    }
+
+    .text {
+        margin-left: 72%;
+    }
+}
+
+@media (max-width: 355px) {
+    .container {
+        min-width: 35rem;
+        min-height: 52rem;
+    }
+
+    .button {
+        margin-top: 2.6rem;
+        font-size: 1.9rem;
+        font-weight: 500;
+        width: 16rem;
+        height: 6rem;
+    }
+
+    .card {
+        min-width: 7rem;
+        height: 7rem;
+    }
+
+    .text {
+        margin-left: 72%;
+    }
+}
